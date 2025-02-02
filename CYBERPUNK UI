@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+        body {
+            background: #0d0d0d;
+            overflow: hidden;
+        }
+        .hero {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .background-animation {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,242,0.2) 10%, transparent 80%);
+            animation: pulse 5s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+        .card {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 255, 242, 0.3), rgba(255, 0, 255, 0.3));
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 0 15px cyan, 0 0 20px magenta;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px cyan, 0 0 35px magenta;
+        }
+        .card h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .card p {
+            color: white;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(90deg, cyan, magenta);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 0 10px cyan;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px cyan, 0 0 25px magenta;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="background-animation"></div>
+        <div class="card">
+            <h2>Welcome to Cyber UI</h2>
+            <p>Experience the next-gen futuristic UI.</p>
+            <button class="button">Explore</button>
+        </div>
+    </div>
+
+</body>
+</html>
