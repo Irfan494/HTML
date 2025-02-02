@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cyber UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+        body {
+            background: #0d0d0d;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* 3D Cube */
+        .cube {
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            transform: rotateX(20deg) rotateY(20deg);
+            animation: rotate 6s linear infinite;
+            position: relative;
+        }
+        @keyframes rotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        .cube div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(90deg, cyan, magenta);
+            border: 2px solid white;
+            box-shadow: 0 0 10px cyan, 0 0 15px magenta;
+            opacity: 0.8;
+        }
+        .front  { transform: translateZ(50px); }
+        .back   { transform: rotateY(180deg) translateZ(50px); }
+        .left   { transform: rotateY(-90deg) translateZ(50px); }
+        .right  { transform: rotateY(90deg) translateZ(50px); }
+        .top    { transform: rotateX(90deg) translateZ(50px); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        /* Interactive Controls */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .slider {
+            width: 200px;
+            accent-color: cyan;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(90deg, cyan, magenta);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 0 10px cyan;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px cyan, 0 0 25px magenta;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="cube" id="cube">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+
+        <div class="controls">
+            <input type="range" min="0" max="360" value="20" class="slider" id="rotateX">
+            <input type="range" min="0" max="360" value="20" class="slider" id="rotateY">
+            <button class="button" onclick="changeColor()">Change Color</button>
+        </div>
+    </div>
+
+    <script>
+        let cube = document.getElementById("cube");
+        let rotateX = document.getElementById("rotateX");
+        let rotateY = document.getElementById("rotateY");
+
+        rotateX.addEventListener("input", () => {
+            cube.style.transform = `rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`;
+        });
+
+        rotateY.addEventListener("input", () => {
+            cube.style.transform = `rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`;
+        });
+
+        function changeColor() {
+            let colors = ["cyan", "magenta", "lime", "yellow", "orange"];
+            let randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.querySelectorAll('.cube div').forEach(face => {
+                face.style.background = `linear-gradient(90deg, ${randomColor}, magenta)`;
+                face.style.boxShadow = `0 0 10px ${randomColor}, 0 0 15px magenta`;
+            });
+        }
+    </script>
+
+</body>
+</html>
