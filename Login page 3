@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particle Background Login & Registration</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      z-index: 2;
+      transition: opacity 0.5s ease, transform 1.5s ease;
+    }
+
+    .container.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-100%) rotateY(-90deg);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.7);
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      outline: none;
+      font-size: 1rem;
+      transition: box-shadow 0.3s ease;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    input:focus {
+      box-shadow: 0 0 10px cyan, 0 0 20px cyan;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.5s ease;
+    }
+
+    .btn:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 20px cyan, 0 0 40px cyan;
+    }
+
+    .toggle-text {
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      color: cyan;
+      text-decoration: underline;
+      font-size: 1rem;
+      transition: text-shadow 0.3s ease;
+    }
+
+    .toggle-text:hover {
+      text-shadow: 0 0 10px cyan, 0 0 20px cyan;
+    }
+
+    /* Particle Background */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <!-- Login Page -->
+  <div id="login-page" class="container">
+    <h2>Login</h2>
+    <input type="text" placeholder="Username" />
+    <input type="password" placeholder="Password" />
+    <button class="btn">Login</button>
+    <p class="toggle-text" onclick="togglePage()">Don't have an account? Register</p>
+  </div>
+
+  <!-- Registration Page -->
+  <div id="registration-page" class="container hidden">
+    <h2>Register</h2>
+    <input type="text" placeholder="Username" />
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <button class="btn">Register</button>
+    <p class="toggle-text" onclick="togglePage()">Already have an account? Login</p>
+  </div>
+
+  <!-- Particle.js Library -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Initialize Particle Background
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            value_area: 800,
+          },
+        },
+        color: {
+          value: "#00d2ff",
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0,
+            color: "#000000",
+          },
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false,
+          },
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false,
+          },
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00d2ff",
+          opacity: 0.4,
+          width: 1,
+        },
+        move: {
+          enable: true,
+          speed: 3,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200,
+          },
+        },
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "bubble",
+          },
+          onclick: {
+            enable: true,
+            mode: "push",
+          },
+          resize: true,
+        },
+        modes: {
+          bubble: {
+            distance: 200,
+            size: 6,
+            duration: 2,
+            opacity: 0.8,
+            speed: 3,
+          },
+          push: {
+            particles_nb: 4,
+          },
+        },
+      },
+      retina_detect: true,
+    });
+
+    // Page Transition Logic
+    function togglePage() {
+      const loginPage = document.getElementById('login-page');
+      const registrationPage = document.getElementById('registration-page');
+
+      if (loginPage.classList.contains('hidden')) {
+        loginPage.classList.remove('hidden');
+        registrationPage.classList.add('hidden');
+        loginPage.classList.remove('slide-out');
+        registrationPage.classList.remove('slide-in');
+        loginPage.classList.add('slide-in');
+      } else {
+        loginPage.classList.add('hidden');
+        registrationPage.classList.remove('hidden');
+        loginPage.classList.remove('slide-in');
+        registrationPage.classList.remove('slide-out');
+        registrationPage.classList.add('slide-in');
+      }
+    }
+  </script>
+</body>
+</html>
